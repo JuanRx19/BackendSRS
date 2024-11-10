@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using BackendSRS.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,10 @@ builder.Services.AddControllers();
 // Configura Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<UsuariosService>();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
+
 
 var app = builder.Build();
 
@@ -24,5 +29,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
