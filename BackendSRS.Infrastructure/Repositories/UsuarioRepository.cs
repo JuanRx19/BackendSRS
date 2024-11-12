@@ -19,15 +19,21 @@ namespace BackendSRS.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<string> VerificarInicioSesion(string email, string password)
+        public string GetPassword(string email)
+        {
+            var usuario = _context.Usuarios.FirstOrDefault(x => x.Email == email);
+            return usuario?.Password;
+        }
+
+        public string VerificarInicioSesion(string email, string password)
         {
             var usuario = _context.Usuarios.FirstOrDefault(x => x.Email == email && x.Password == password);
             if (usuario == null)
             {
-                return "Usuario no encontrado";
+                return "Usuario o Contraseña no coinciden";
             }
 
-            return "Usuario encontrado";
+            return "Usuario Encontrado";
         }
 
         public async Task CreateUsuario(Usuarios usuario)

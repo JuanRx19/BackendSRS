@@ -20,17 +20,6 @@ namespace BackendSRS.Application.Services
             _encriptacionService = encriptacionService;
             _usuarioRepository = usuarioRepository;
         }
-
-        public async Task<string> VerificarInicioSesion(string email, string password)
-        {
-            return await _usuarioRepository.VerificarInicioSesion(email, password);
-        }
-
-        public string GetAyuda()
-        {
-            return "Ayuda obtenida";
-        }
-
         public async Task CreateUsuario(string nombre, string apellido, string email, string password, int rolId, DateTime fechaRegistro)
         {
             Usuarios usuario = new Usuarios();
@@ -45,5 +34,20 @@ namespace BackendSRS.Application.Services
 
             await _usuarioRepository.CreateUsuario(usuario);
         }
+
+        public string GetPassword(string email)
+        {
+            return _usuarioRepository.GetPassword(email);
+        }
+
+        public string VerificarInicioSesion(string email, string password)
+        {
+
+            string passwordCifrado = _encriptacionService.Encriptar(password);
+
+            return _usuarioRepository.VerificarInicioSesion(email, passwordCifrado);
+        }
+
+        
     }
 }

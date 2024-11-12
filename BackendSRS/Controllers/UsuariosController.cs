@@ -22,9 +22,9 @@ namespace BackendSRS.API.Controllers
         //}
 
         [HttpGet("VerificaInicioSesion")]
-        public async Task<string> VerificaInicioSesion(string email, string password)
+        public string VerificaInicioSesion(string email, string password)
         {
-            var result = await _usuariosService.VerificarInicioSesion(email, password);
+            var result = _usuariosService.VerificarInicioSesion(email, password);
             return result;
         }
 
