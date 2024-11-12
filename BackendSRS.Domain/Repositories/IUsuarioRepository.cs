@@ -10,7 +10,7 @@ namespace BackendSRS.Domain.Repositories
     public interface IUsuarioRepository
     {
 
-        //public async Task<string> VerificarInicioSesion(string email, string password);
+        public Task<string> VerificarInicioSesion(string email, string password);
         public Task CreateUsuario(Usuarios usuario);
 
     }

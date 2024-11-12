@@ -26,6 +26,7 @@ namespace BackendSRS.Infrastructure.Repositories
             {
                 return "Usuario no encontrado";
             }
+
             return "Usuario encontrado";
         }
 

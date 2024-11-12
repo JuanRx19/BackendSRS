@@ -5,6 +5,8 @@ using BackendSRS.Domain.Repositories;
 using BackendSRS.Infrastructure.Repositories;
 using BackendSRS.Models;
 using BackendSRS.Infrastructure.DBContexts;
+using BackendSRS.Domain.Interfaces;
+using BackendSRS.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuariosService>();
+builder.Services.AddScoped<IEncriptacionService, EncriptacionService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",

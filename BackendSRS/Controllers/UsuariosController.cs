@@ -21,12 +21,11 @@ namespace BackendSRS.API.Controllers
         //    return Ok(result);
         //}
 
-        // Endpoint para GetAyuda
-        [HttpGet("GetAyuda")]
-        public IActionResult GetAyuda()
+        [HttpGet("VerificaInicioSesion")]
+        public async Task<string> VerificaInicioSesion(string email, string password)
         {
-            var result = _usuariosService.GetAyuda();
-            return Ok(result);
+            var result = await _usuariosService.VerificarInicioSesion(email, password);
+            return result;
         }
 
         // Endpoint para CreateUsuario
