@@ -28,10 +28,14 @@ namespace BackendSRS.Infrastructure.Repositories
             return "Usuario encontrado";
         }
 
-        public async Task CreateUsuario(string nombre, string apellido, string email, string password, int rolId, DateTime fechaRegistro)
+        public async Task CreateUsuario(Usuarios usuario)
         {
             // Implementar
             Console.WriteLine("Implementar");
+
+            _context.Usuarios.Add(usuario);
+
+            _context.SaveChanges();
         }
 
 

@@ -14,12 +14,12 @@ namespace BackendSRS.API.Controllers
         }
 
         // Endpoint para GetUsuario
-        [HttpPost("GetUsuario")]
-        public IActionResult GetUsuario([FromBody] string valor, [FromBody] int id)
-        {
-            var result = _usuariosService.GetUsuario(valor, id);
-            return Ok(result);
-        }
+        //[HttpPost("GetUsuario")]
+        //public IActionResult GetUsuario([FromBody] string valor, [FromBody] int id)
+        //{
+        //    var result = _usuariosService.GetUsuario(valor, id);
+        //    return Ok(result);
+        //}
 
         // Endpoint para GetAyuda
         [HttpGet("GetAyuda")]
@@ -34,9 +34,13 @@ namespace BackendSRS.API.Controllers
         public IActionResult CreateUsuario([FromBody] JObject data)
         {
             string nombre = data["nombre"]?.ToString() ?? string.Empty;
-            int edad = data["edad"]?.ToObject<int>() ?? 0;
+            string apellido = data["apellido"]?.ToString() ?? string.Empty;
+            string email = data["email"]?.ToString() ?? string.Empty;
+            string password = data["password"]?.ToString() ?? string.Empty;
+            int rolId = data["rolId"] != null ? int.Parse(data["rolId"].ToString()) : 3;
+            DateTime fechaRegistro = DateTime.Now;
 
-            var result = _usuariosService.CreateUsuario(nombre, edad);
+            var result = _usuariosService.CreateUsuario(nombre, apellido, email, password, rolId, fechaRegistro);
             return Ok(result);
         }
     }

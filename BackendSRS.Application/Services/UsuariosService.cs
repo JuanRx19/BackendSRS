@@ -17,10 +17,10 @@ namespace BackendSRS.Application.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<string> VerificarInicioSesion(string email, string password)
-        {
-            return await _usuarioRepository.VerificarInicioSesion(email, password);
-        }
+        //public async Task<string> VerificarInicioSesion(string email, string password)
+        //{
+        //    return await _usuarioRepository.VerificarInicioSesion(email, password);
+        //}
 
         public string GetAyuda()
         {
@@ -37,7 +37,7 @@ namespace BackendSRS.Application.Services
             usuario.RolId = rolId;
             usuario.FechaRegistro = fechaRegistro;
 
-            return await _usuarioRepository.CreateUsuario(usuario);
+            await _usuarioRepository.CreateUsuario(usuario);
         }
     }
 }
