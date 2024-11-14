@@ -9,8 +9,8 @@ namespace BackendSRS.Domain.Repositories
 {
     public interface IUsuarioRepository
     {
-        public string GetPassword(string email);
-        public string VerificarInicioSesion(string email, string password);
+        public Usuarios ObtenerUsuarioPorEmail(string email);
+        public bool VerificarInicioSesion(string email, string password);
         public Task CreateUsuario(Usuarios usuario);
 
     }

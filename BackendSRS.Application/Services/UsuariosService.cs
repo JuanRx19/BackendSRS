@@ -35,17 +35,14 @@ namespace BackendSRS.Application.Services
             await _usuarioRepository.CreateUsuario(usuario);
         }
 
-        public string GetPassword(string email)
-        {
-            return _usuarioRepository.GetPassword(email);
-        }
-
-        public string VerificarInicioSesion(string email, string password)
+        public bool VerificarInicioSesion(string email, string password)
         {
 
-            string passwordCifrado = _encriptacionService.Encriptar(password);
+            var usuario = _usuarioRepository.ObtenerUsuarioPorEmail(email);
+            if (usuario == null)
+                return false;
 
-            return _usuarioRepository.VerificarInicioSesion(email, passwordCifrado);
+            return _encriptacionService.VerificarPassword(password, usuario.Password);
         }
 
         

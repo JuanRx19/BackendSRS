@@ -19,21 +19,22 @@ namespace BackendSRS.Infrastructure.Repositories
             _context = context;
         }
 
-        public string GetPassword(string email)
-        {
-            var usuario = _context.Usuarios.FirstOrDefault(x => x.Email == email);
-            return usuario?.Password;
-        }
-
-        public string VerificarInicioSesion(string email, string password)
+        public bool VerificarInicioSesion(string email, string password)
         {
             var usuario = _context.Usuarios.FirstOrDefault(x => x.Email == email && x.Password == password);
             if (usuario == null)
             {
-                return "Usuario o Contraseña no coinciden";
+                return false;
             }
 
-            return "Usuario Encontrado";
+
+
+            return true;
+        }
+
+        public Usuarios ObtenerUsuarioPorEmail(string email)
+        {
+            return _context.Usuarios.FirstOrDefault(x => x.Email == email);
         }
 
         public async Task CreateUsuario(Usuarios usuario)

@@ -12,6 +12,8 @@ namespace BackendSRS.Infrastructure.Services
     {
         public string Encriptar(string texto)
         {
+            if (texto == "") { return ""; }
+
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(texto));
@@ -22,9 +24,10 @@ namespace BackendSRS.Infrastructure.Services
                 }
                 return builder.ToString();
             }
+            
         }
 
-        public bool Verificar(string texto, string hash)
+        public bool VerificarPassword(string texto, string hash)
         {
             var hashDeTexto = Encriptar(texto);
             return hash == hashDeTexto;
