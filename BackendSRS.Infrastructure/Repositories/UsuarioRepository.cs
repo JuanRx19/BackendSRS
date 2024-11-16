@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BackendSRS.Domain.Repositories;
 using BackendSRS.Infrastructure.DBContexts;
 using BackendSRS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendSRS.Infrastructure.Repositories
 {
@@ -19,14 +20,22 @@ namespace BackendSRS.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<string> VerificarInicioSesion(string email, string password)
+        public bool VerificarInicioSesion(string email, string password)
         {
             var usuario = _context.Usuarios.FirstOrDefault(x => x.Email == email && x.Password == password);
             if (usuario == null)
             {
-                return "Usuario no encontrado";
+                return false;
             }
-            return "Usuario encontrado";
+
+
+
+            return true;
+        }
+
+        public Usuarios ObtenerUsuarioPorEmail(string email)
+        {
+            return _context.Usuarios.FirstOrDefault(x => x.Email == email);
         }
 
         public async Task CreateUsuario(Usuarios usuario)
@@ -39,6 +48,23 @@ namespace BackendSRS.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-
+        public List<Usuarios> GetUsuarios()
+        {
+            return _context.Usuarios
+                .Include(u => u.Rol)
+                .Select(u => new Usuarios
+                {
+                    UsuarioId = u.UsuarioId,
+                    Nombre = u.Nombre,
+                    Email = u.Email,
+                    FechaRegistro = u.FechaRegistro,
+                    Rol = new Roles
+                    {
+                        RolId = u.Rol.RolId,
+                        NombreRol = u.Rol.NombreRol
+                    }
+                })
+                .ToList();
+        }
     }
 }

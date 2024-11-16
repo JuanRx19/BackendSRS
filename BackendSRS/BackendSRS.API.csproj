@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BackendSRS.Application\BackendSRS.Application.csproj" />
-    <ProjectReference Include="..\BackendSRS.Domain\BackendSRS.Domain.csproj" />
     <ProjectReference Include="..\BackendSRS.Infrastructure\BackendSRS.Infrastructure.csproj" />
   </ItemGroup>
 
