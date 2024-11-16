@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BackendSRS.Domain.Repositories;
 using BackendSRS.Infrastructure.DBContexts;
 using BackendSRS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendSRS.Infrastructure.Repositories
 {
@@ -47,6 +48,23 @@ namespace BackendSRS.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-
+        public List<Usuarios> GetUsuarios()
+        {
+            return _context.Usuarios
+                .Include(u => u.Rol)
+                .Select(u => new Usuarios
+                {
+                    UsuarioId = u.UsuarioId,
+                    Nombre = u.Nombre,
+                    Email = u.Email,
+                    FechaRegistro = u.FechaRegistro,
+                    Rol = new Roles
+                    {
+                        RolId = u.Rol.RolId,
+                        NombreRol = u.Rol.NombreRol
+                    }
+                })
+                .ToList();
+        }
     }
 }

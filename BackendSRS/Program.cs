@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using BackendSRS.Application.Services;
 using BackendSRS.Domain.Repositories;
