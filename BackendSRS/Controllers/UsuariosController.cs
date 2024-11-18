@@ -68,5 +68,12 @@ namespace BackendSRS.API.Controllers
             var result = _usuariosService.CreateUsuario(nombre, apellido, email, password, rolId, fechaRegistro);
             return Ok(result);
         }
+
+        [HttpGet("GetUsuarios")]
+        public IActionResult GetUsuarios()
+        {
+            var result = _usuariosService.GetUsuarios();
+            return Ok(result);
+        }
     }
 }

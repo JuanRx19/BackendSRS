@@ -13,5 +13,6 @@ namespace BackendSRS.Domain.Repositories
         public bool VerificarInicioSesion(string email, string password);
         public Task CreateUsuario(Usuarios usuario);
 
+        public List<Usuarios> GetUsuarios();
     }
 }

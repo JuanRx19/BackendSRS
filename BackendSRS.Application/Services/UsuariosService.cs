@@ -45,6 +45,8 @@ namespace BackendSRS.Application.Services
             return _encriptacionService.VerificarPassword(password, usuario.Password);
         }
 
-        
+        public List<Usuarios> GetUsuarios() {
+            return _usuarioRepository.GetUsuarios();
+        }
     }
 }
