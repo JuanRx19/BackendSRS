@@ -1,21 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using BackendSRS.Application.Services;
 
-[ApiController]
-[Route("api/[controller]")]
-public class AlertasController : ControllerBase
+namespace BackendSRS.Controllers
 {
-    private readonly IAlertasService _alertasService;
-
-    public AlertasController(IAlertasService alertasService)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AlertasController : ControllerBase
     {
-        _alertasService = alertasService;
-    }
+        private readonly IAlertasService _alertasService;
 
-    [HttpGet("notificaciones")]
-    public IActionResult ObtenerNotificacionesCriticas()
-    {
-        var alertas = _alertasService.ObtenerAlertasCriticas();
-        return Ok(alertas);
+        public AlertasController(IAlertasService alertasService)
+        {
+            _alertasService = alertasService;
+        }
+
+        [HttpGet("notificaciones")]
+        public IActionResult ObtenerAlertas()
+        {
+            var alertas = _alertasService.ObtenerAlertasCriticas();
+            return Ok(alertas);
+        }
+
+        [HttpPost("generar")]
+        public IActionResult GenerarAlerta([FromBody] Alerta alerta)
+        {
+            _alertasService.GenerarAlerta(alerta.Mensaje, alerta.Criticidad);
+            return Ok("Alerta generada exitosamente.");
+        }
     }
 }

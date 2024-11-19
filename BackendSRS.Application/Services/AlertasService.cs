@@ -1,22 +1,38 @@
-using BackendSRS.Domain.Entities;
+using BackendSRS.Domain.Entities.Models;
+using BackendSRS.Infrastructure.Repositories;
 
-public interface IAlertasService
+namespace BackendSRS.Application.Services
 {
-    List<Alerta> ObtenerAlertasCriticas();
-}
-
-public class AlertasService : IAlertasService
-{
-    public List<Alerta> ObtenerAlertasCriticas()
+    public interface IAlertasService
     {
-        // Simulación de lógica para detectar alertas de baja batería o condiciones climáticas.
-        return new List<Alerta>
+        List<Alerta> ObtenerAlertasCriticas();
+        void GenerarAlerta(string mensaje, string criticidad);
+    }
+
+    public class AlertasService : IAlertasService
+    {
+        private readonly IAlertasRepository _repository;
+
+        public AlertasService(IAlertasRepository repository)
         {
-            new Alerta { Mensaje = "Batería baja en el dron X", Criticidad = "Alta" },
-            new Alerta { Mensaje = "Condiciones climáticas peligrosas detectadas", Criticidad = "Alta" }
-        };
+            _repository = repository;
+        }
+
+        public List<Alerta> ObtenerAlertasCriticas()
+        {
+            return _repository.ObtenerAlertas();
+        }
+
+        public void GenerarAlerta(string mensaje, string criticidad)
+        {
+            var alerta = new Alerta
+            {
+                Id = new Random().Next(1, 1000), // Simulación de ID único
+                Mensaje = mensaje,
+                Criticidad = criticidad,
+                FechaCreacion = DateTime.Now
+            };
+            _repository.AgregarAlerta(alerta);
+        }
     }
 }
-
-
-
