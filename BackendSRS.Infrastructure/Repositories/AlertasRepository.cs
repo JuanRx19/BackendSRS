@@ -1,4 +1,10 @@
-﻿using BackendSRS.Domain.Entities.Models;
+﻿using BackendSRS.Domain.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BackendSRS.Models;
 using BackendSRS.Domain.Repositories;
 
 namespace BackendSRS.Infrastructure.Repositories

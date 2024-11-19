@@ -1,4 +1,7 @@
-﻿using BackendSRS.Domain.Entities.Models;
+﻿
+using System;
+using System.Collections.Generic;
+using BackendSRS.Models;
 
 namespace BackendSRS.Domain.Repositories
 {

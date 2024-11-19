@@ -1,5 +1,5 @@
 using BackendSRS.Application.Services;
-using BackendSRS.Domain.Entities.Models;
+using BackendSRS.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendSRS.API.Controllers

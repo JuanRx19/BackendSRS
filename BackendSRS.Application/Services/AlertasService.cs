@@ -1,4 +1,7 @@
-using BackendSRS.Domain.Entities.Models;
+
+using System;
+using System.Collections.Generic;
+using BackendSRS.Models;
 using BackendSRS.Domain.Repositories;
 
 namespace BackendSRS.Application.Services
@@ -27,7 +30,7 @@ namespace BackendSRS.Application.Services
         {
             var alerta = new Alerta
             {
-                Id = new Random().Next(1, 10000), // Simulación de ID único.
+                //Id = new Random().Next(1, 10000), // Simulación de ID único.
                 Mensaje = mensaje,
                 Criticidad = criticidad,
                 FechaCreacion = DateTime.Now
