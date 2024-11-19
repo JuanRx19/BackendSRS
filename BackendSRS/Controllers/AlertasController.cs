@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using BackendSRS.Application.Services;
+using BackendSRS.Domain.Entities.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BackendSRS.Controllers
+namespace BackendSRS.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -14,14 +15,14 @@ namespace BackendSRS.Controllers
             _alertasService = alertasService;
         }
 
-        [HttpGet("notificaciones")]
+        [HttpGet]
         public IActionResult ObtenerAlertas()
         {
-            var alertas = _alertasService.ObtenerAlertasCriticas();
+            var alertas = _alertasService.ObtenerAlertas();
             return Ok(alertas);
         }
 
-        [HttpPost("generar")]
+        [HttpPost]
         public IActionResult GenerarAlerta([FromBody] Alerta alerta)
         {
             _alertasService.GenerarAlerta(alerta.Mensaje, alerta.Criticidad);
