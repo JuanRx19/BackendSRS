@@ -17,6 +17,9 @@ builder.Services.AddDbContext<BdtransporteUniversitarioContext>(options =>
 
 
 // Configura Swagger
+builder.Services.AddScoped<IAlertasRepository, AlertasRepository>();
+builder.Services.AddScoped<IAlertasService, AlertasService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -46,6 +49,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("AllowFrontend");
 
 
 app.Run();
