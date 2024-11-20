@@ -38,7 +38,7 @@ namespace BackendSRS.Application.Services
         public bool VerificarInicioSesion(string email, string password)
         {
 
-            var usuario = _usuarioRepository.ObtenerUsuarioPorEmail(email);
+            var usuario = GetUsuarioByEmail(email);
             if (usuario == null)
                 return false;
 
@@ -48,5 +48,20 @@ namespace BackendSRS.Application.Services
         public List<Usuarios> GetUsuarios() {
             return _usuarioRepository.GetUsuarios();
         }
+
+        public Usuarios GetUsuarioByEmail(string email)
+        {
+            return _usuarioRepository.ObtenerUsuarioPorEmail(email);
+        }
+
+        public bool verificarContraseña(string email, string password)
+        {
+            var usuario = _usuarioRepository.ObtenerUsuarioPorEmail(email);
+            if (usuario == null)
+                return false;
+
+            return _encriptacionService.VerificarPassword(password, usuario.Password);
+        }
+
     }
 }

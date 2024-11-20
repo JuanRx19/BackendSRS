@@ -9,11 +9,42 @@ using BackendSRS.Domain.Interfaces;
 using BackendSRS.Infrastructure.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Token JWT
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings["Secret"];
+var issuer = jwtSettings["Issuer"];
+var audience = jwtSettings["Audience"];
+
+Console.WriteLine($"SecretKey: {secretKey}");
+Console.WriteLine($"Issuer: {issuer}");
+Console.WriteLine($"Audience: {audience}");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = issuer,
+        ValidAudience = audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+    };
+});
 
 builder.Services.AddDbContext<BdtransporteUniversitarioContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -29,13 +60,16 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IDispositivosRepository, DispositivosRepository>();
 builder.Services.AddScoped<UsuariosService>();
 builder.Services.AddScoped<InventarioService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEncriptacionService, EncriptacionService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy => policy.WithOrigins("http://localhost:5173") // URL del frontend
                          .AllowAnyHeader()
-                         .AllowAnyMethod());
+                         .AllowAnyMethod()
+                         .AllowCredentials()
+                         );
 });
 builder.Services.AddControllers().AddNewtonsoftJson();
 
@@ -51,6 +85,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

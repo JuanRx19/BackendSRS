@@ -1,4 +1,5 @@
 ﻿using BackendSRS.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -15,14 +16,6 @@ namespace BackendSRS.API.Controllers
         {
             _usuariosService = usuariosService;
         }
-
-        // Endpoint para GetUsuario
-        //[HttpPost("GetUsuario")]
-        //public IActionResult GetUsuario([FromBody] string valor, [FromBody] int id)
-        //{
-        //    var result = _usuariosService.GetUsuario(valor, id);
-        //    return Ok(result);
-        //}
 
         [HttpPost("VerificarInicioSesion")]
         public IActionResult VerificarInicioSesion([FromBody] LoginRequest request)
@@ -69,6 +62,7 @@ namespace BackendSRS.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("GetUsuarios")]
         public IActionResult GetUsuarios()
         {
