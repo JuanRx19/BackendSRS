@@ -21,7 +21,7 @@ builder.Services.AddDbContext<BdtransporteUniversitarioContext>(options =>
 
 // Configura Swagger
 builder.Services.AddScoped<IAlertasRepository, AlertasRepository>();
-builder.Services.AddScoped<IAlertasService, AlertasService>();
+builder.Services.AddScoped<AlertasService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

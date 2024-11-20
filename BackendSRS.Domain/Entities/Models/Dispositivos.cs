@@ -22,7 +22,7 @@ public partial class Dispositivos
 
     public DateTime? FechaRegistro { get; set; }
 
-    public virtual ICollection<Alerta> Alerta { get; set; } = new List<Alerta>();
+    public virtual ICollection<Alertas> Alertas { get; set; } = new List<Alertas>();
 
     public virtual ICollection<Inventario> Inventarios { get; set; } = new List<Inventario>();
 

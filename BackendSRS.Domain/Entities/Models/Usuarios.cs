@@ -19,7 +19,7 @@ public partial class Usuarios
 
     public DateTime? FechaRegistro { get; set; }
 
-    public virtual ICollection<Alerta> Alerta { get; set; } = new List<Alerta>();
+    public virtual ICollection<Alertas> Alertas { get; set; } = new List<Alertas>();
 
     public virtual ICollection<Reservas> Reservas { get; set; } = new List<Reservas>();
 

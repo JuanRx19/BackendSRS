@@ -1,14 +1,15 @@
-﻿
+﻿using BackendSRS.Models;
 using System;
 using System.Collections.Generic;
-using BackendSRS.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BackendSRS.Domain.Repositories
 {
     public interface IAlertasRepository
     {
-        List<Alerta> ObtenerAlertas();
-        void AgregarAlerta(Alerta alerta);
-
+        List<Alertas> ObtenerAlertas();
+        void AgregarAlerta(Alertas alerta);
     }
 }

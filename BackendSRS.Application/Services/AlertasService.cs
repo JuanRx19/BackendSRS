@@ -6,15 +6,8 @@ using BackendSRS.Domain.Repositories;
 
 namespace BackendSRS.Application.Services
 {
-    public interface IAlertasService
-    {
-        List<Alerta> ObtenerAlertas();
-        void GenerarAlerta(string mensaje, string criticidad);
-        void GenerarAlertaBateria(int dispositivoId, int porcentajeBateria);
 
-    }
-
-    public class AlertasService : IAlertasService
+    public class AlertasService
     {
         private readonly IAlertasRepository _alertasRepository;
 
@@ -23,14 +16,14 @@ namespace BackendSRS.Application.Services
             _alertasRepository = alertasRepository;
         }
 
-        public List<Alerta> ObtenerAlertas()
+        public List<Alertas> ObtenerAlertas()
         {
             return _alertasRepository.ObtenerAlertas();
         }
 
         public void GenerarAlerta(string mensaje, string criticidad)
         {
-            var alerta = new Alerta
+            var alerta = new Alertas
             {
                 //Id = new Random().Next(1, 10000), // Simulación de ID único.
                 Mensaje = mensaje,

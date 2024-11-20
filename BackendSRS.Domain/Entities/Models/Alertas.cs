@@ -5,7 +5,7 @@ using System;
 
 namespace BackendSRS.Models
 {
-    public class Alerta
+    public class Alertas
     {
         // Propiedades mapeadas en la base de datos
         public int AlertaId { get; set; }
@@ -25,15 +25,4 @@ namespace BackendSRS.Models
         public virtual Usuarios? Usuario { get; set; }
         public virtual Dispositivos? Dispositivo { get; set; }
     }
-
-    // Clase para representar los datos de la batería
-    public class BateriaDto
-    {
-        public int DispositivoId { get; set; }
-        public int PorcentajeBateria { get; set; }
-    }
-
-
-
-
 }

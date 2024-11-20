@@ -17,7 +17,7 @@ public partial class BdtransporteUniversitarioContext : DbContext
     {
     }
 
-    public virtual DbSet<Alerta> Alertas { get; set; }
+    public virtual DbSet<Alertas> Alertas { get; set; }
 
     public virtual DbSet<Condicionesclimaticas> Condicionesclimaticas { get; set; }
 
@@ -47,7 +47,7 @@ public partial class BdtransporteUniversitarioContext : DbContext
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Alerta>(entity =>
+        modelBuilder.Entity<Alertas>(entity =>
         {
             entity.HasKey(e => e.AlertaId).HasName("PRIMARY");
 
@@ -66,11 +66,11 @@ public partial class BdtransporteUniversitarioContext : DbContext
             entity.Property(e => e.TipoAlerta).HasColumnType("enum('batería baja','condición climática','atasco','otro')");
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
 
-            entity.HasOne(d => d.Dispositivo).WithMany(p => p.Alerta)
+            entity.HasOne(d => d.Dispositivo).WithMany(p => p.Alertas)
                 .HasForeignKey(d => d.DispositivoId)
                 .HasConstraintName("alertas_ibfk_1");
 
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Alerta)
+            entity.HasOne(d => d.Usuario).WithMany(p => p.Alertas)
                 .HasForeignKey(d => d.UsuarioId)
                 .HasConstraintName("alertas_ibfk_2");
         });
