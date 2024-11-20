@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackendSRS.Infrastructure.Models;
 using BackendSRS.Models;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
@@ -36,6 +37,8 @@ public partial class BdtransporteUniversitarioContext : DbContext
     public virtual DbSet<Usuarios> Usuarios { get; set; }
 
     public virtual DbSet<Videos> Videos { get; set; }
+
+    public virtual DbSet<Reportes> Reportes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -247,6 +250,43 @@ public partial class BdtransporteUniversitarioContext : DbContext
             entity.HasOne(d => d.Dispositivo).WithMany(p => p.Videos)
                 .HasForeignKey(d => d.DispositivoId)
                 .HasConstraintName("videos_ibfk_1");
+        });
+
+        modelBuilder.Entity<Reportes>(entity =>
+        {
+            entity.HasKey(e => e.ReporteId).HasName("PRIMARY");
+
+            entity.ToTable("reportes");
+
+            entity.HasIndex(e => e.AlertaId, "AlertaID");
+
+            entity.HasIndex(e => e.DispositivoId, "DispositivoID");
+
+            entity.HasIndex(e => e.ReservaId, "ReservaID");
+
+            entity.HasIndex(e => e.UsuarioId, "UsuarioID");
+
+            entity.Property(e => e.ReporteId).HasColumnName("ReporteID");
+            entity.Property(e => e.AlertaId).HasColumnName("AlertaID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Descripcion)
+                .HasColumnType("text")
+                .HasColumnName("descripcion");
+            entity.Property(e => e.DispositivoId).HasColumnName("DispositivoID");
+            entity.Property(e => e.FechaReporte).HasColumnName("fecha_reporte");
+            entity.Property(e => e.ReservaId).HasColumnName("ReservaID");
+            entity.Property(e => e.Titulo)
+                .HasMaxLength(150)
+                .HasColumnName("titulo");
+            entity.Property(e => e.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
         });
 
         OnModelCreatingPartial(modelBuilder);
