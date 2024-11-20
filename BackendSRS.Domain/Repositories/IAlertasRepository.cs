@@ -9,5 +9,6 @@ namespace BackendSRS.Domain.Repositories
     {
         List<Alerta> ObtenerAlertas();
         void AgregarAlerta(Alerta alerta);
+
     }
 }

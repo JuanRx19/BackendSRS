@@ -8,7 +8,7 @@ namespace BackendSRS.Models
     public class Alerta
     {
         // Propiedades mapeadas en la base de datos
-        public int AlertaId { get; set; } // Este debe coincidir con la columna "AlertaID"
+        public int AlertaId { get; set; }
         public string? EstadoAlerta { get; set; }
         public string? TipoAlerta { get; set; }
         public DateTime FechaAlerta { get; set; } = DateTime.Now;
@@ -19,11 +19,21 @@ namespace BackendSRS.Models
         public string Criticidad { get; set; } = "Media";
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
-        // Relaciones de navegación (opcional según la base de datos)
-        public int DispositivoId { get; set; }  // Clave foránea para Dispositivo
-        public int UsuarioId { get; set; }      // Clave foránea para Usuario
-
-        public virtual Usuarios? Usuario { get; set; }   // Relación con la entidad Usuario
-        public virtual Dispositivos? Dispositivo { get; set; } // Relación con la entidad Dispositivo
+        // Relaciones de navegación
+        public int DispositivoId { get; set; }
+        public int UsuarioId { get; set; }
+        public virtual Usuarios? Usuario { get; set; }
+        public virtual Dispositivos? Dispositivo { get; set; }
     }
+
+    // Clase para representar los datos de la batería
+    public class BateriaDto
+    {
+        public int DispositivoId { get; set; }
+        public int PorcentajeBateria { get; set; }
+    }
+
+
+
+
 }

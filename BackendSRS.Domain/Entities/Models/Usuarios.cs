@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackendSRS.Models;
 
+
 namespace BackendSRS.Models;
 
 public partial class Usuarios

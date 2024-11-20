@@ -28,5 +28,20 @@ namespace BackendSRS.API.Controllers
             _alertasService.GenerarAlerta(alerta.Mensaje, alerta.Criticidad);
             return Ok("Alerta generada exitosamente.");
         }
+        // Endpoint para simular una alerta de batería baja
+        [HttpPost("bateria")]
+        public IActionResult GenerarAlertaBateria([FromBody] BateriaDto bateriaDto)
+        {
+            _alertasService.GenerarAlertaBateria(bateriaDto.DispositivoId, bateriaDto.PorcentajeBateria);
+
+            // Recuperar las alertas actuales después de generar la nueva alerta
+            var alertas = _alertasService.ObtenerAlertas();
+
+            // Devolver las alertas actuales
+            return Ok(alertas);
+        }
+
+
+
     }
 }

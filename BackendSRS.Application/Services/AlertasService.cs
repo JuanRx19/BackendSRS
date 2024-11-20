@@ -10,6 +10,8 @@ namespace BackendSRS.Application.Services
     {
         List<Alerta> ObtenerAlertas();
         void GenerarAlerta(string mensaje, string criticidad);
+        void GenerarAlertaBateria(int dispositivoId, int porcentajeBateria);
+
     }
 
     public class AlertasService : IAlertasService
@@ -37,5 +39,18 @@ namespace BackendSRS.Application.Services
             };
             _alertasRepository.AgregarAlerta(alerta);
         }
+        public void GenerarAlertaBateria(int dispositivoId, int porcentajeBateria)
+        {
+            if (porcentajeBateria <50) // Si el porcentaje de batería es menor al 20%
+            {
+                var mensaje = $"Batería baja en el dispositivo {dispositivoId}. Porcentaje: {porcentajeBateria}%.";
+                Console.WriteLine("Alerta generada con mensaje: " + mensaje);
+                GenerarAlerta(mensaje, "Alta");
+
+            }
+        }
+
+
+
     }
 }
