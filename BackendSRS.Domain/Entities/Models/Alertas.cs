@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using System;
+using BackendSRS.Infrastructure.Models;
 
 namespace BackendSRS.Models
 {
@@ -24,5 +25,8 @@ namespace BackendSRS.Models
         public int UsuarioId { get; set; }
         public virtual Usuarios? Usuario { get; set; }
         public virtual Dispositivos? Dispositivo { get; set; }
+        public virtual ICollection<Reportes> Reportes { get; set; } = new List<Reportes>();
     }
+
+   
 }

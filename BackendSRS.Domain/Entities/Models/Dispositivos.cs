@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackendSRS.Infrastructure.Models;
 using BackendSRS.Models;
 
 namespace BackendSRS.Models;
@@ -31,4 +32,6 @@ public partial class Dispositivos
     public virtual ICollection<Reservas> Reservas { get; set; } = new List<Reservas>();
 
     public virtual ICollection<Videos> Videos { get; set; } = new List<Videos>();
+
+    public virtual ICollection<Reportes> Reportes { get; set; } = new List<Reportes>();
 }

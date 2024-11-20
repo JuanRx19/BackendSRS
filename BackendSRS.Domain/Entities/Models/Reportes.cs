@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackendSRS.Models;
+using System;
 using System.Collections.Generic;
 
 namespace BackendSRS.Infrastructure.Models;
@@ -19,9 +20,18 @@ public partial class Reportes
 
     public string? Descripcion { get; set; }
 
-    public DateOnly FechaReporte { get; set; }
+    public DateTime FechaReporte { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
+
+    public virtual Alertas? Alerta { get; set; }
+
+    public virtual Usuarios? Usuario { get; set; }
+
+    public virtual Dispositivos? Dispositivo { get; set; }
+
+    public virtual Reservas? Reserva { get; set; }
+
 }

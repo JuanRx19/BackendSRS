@@ -32,13 +32,13 @@ public partial class BdtransporteUniversitarioContext : DbContext
 
     public virtual DbSet<Reservas> Reservas { get; set; }
 
+    public virtual DbSet<Reportes> Reportes { get; set; }
+
     public virtual DbSet<Roles> Roles { get; set; }
 
     public virtual DbSet<Usuarios> Usuarios { get; set; }
 
     public virtual DbSet<Videos> Videos { get; set; }
-
-    public virtual DbSet<Reportes> Reportes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql("server=localhost;port=3306;database=BDTransporteUniversitario;user=root;password=admin", ServerVersion.Parse("8.0.37-mysql"));
@@ -196,6 +196,52 @@ public partial class BdtransporteUniversitarioContext : DbContext
             entity.HasOne(d => d.Usuario).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.UsuarioId)
                 .HasConstraintName("reservas_ibfk_2");
+        });
+
+        modelBuilder.Entity<Reportes>(entity =>
+        {
+            entity.HasKey(e => e.ReporteId).HasName("PRIMARY");
+
+            entity.ToTable("reportes");
+
+            entity.HasIndex(e => e.AlertaId, "AlertaID");
+
+            entity.HasIndex(e => e.DispositivoId, "DispositivoID");
+
+            entity.HasIndex(e => e.ReservaId, "ReservaID");
+
+            entity.HasIndex(e => e.UsuarioId, "UsuarioID");
+
+            entity.Property(e => e.ReporteId).HasColumnName("ReporteID");
+
+            entity.Property(e => e.AlertaId).HasColumnName("AlertaID");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+
+            entity.Property(e => e.Descripcion)
+                .HasColumnType("text")
+                .HasColumnName("descripcion");
+
+            entity.Property(e => e.DispositivoId).HasColumnName("DispositivoID");
+
+            entity.Property(e => e.FechaReporte).HasColumnName("fecha_reporte");
+
+            entity.Property(e => e.ReservaId).HasColumnName("ReservaID");
+
+            entity.Property(e => e.Titulo)
+                .HasMaxLength(150)
+                .HasColumnName("titulo");
+
+            entity.Property(e => e.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("updated_at");
+
+            entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
         });
 
         modelBuilder.Entity<Roles>(entity =>

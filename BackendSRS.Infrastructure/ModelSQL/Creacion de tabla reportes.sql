@@ -1,0 +1,26 @@
+--CREATE TABLE IF NOT EXISTS reportes (
+--    ReporteID INT AUTO_INCREMENT PRIMARY KEY,
+--    DispositivoID INT NOT NULL,
+--    ReservaID INT NOT NULL,
+--    UsuarioID INT NOT NULL,
+--    AlertaID INT,
+--    titulo VARCHAR(150) NOT NULL,
+--    descripcion TEXT,
+--    fecha_reporte DATE NOT NULL,
+--    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+--    -- Claves Foráneas
+--    FOREIGN KEY (DispositivoID) REFERENCES dispositivos(DispositivoID)
+--        ON DELETE CASCADE
+--        ON UPDATE CASCADE,
+--    FOREIGN KEY (ReservaID) REFERENCES reservas(ReservaID)
+--        ON DELETE CASCADE
+--        ON UPDATE CASCADE,
+--    FOREIGN KEY (UsuarioID) REFERENCES usuarios(UsuarioID)
+--        ON DELETE CASCADE
+--        ON UPDATE CASCADE,
+--    FOREIGN KEY (AlertaID) REFERENCES alertas(AlertaID)
+--        ON DELETE CASCADE
+--        ON UPDATE CASCADE
+--);

@@ -28,8 +28,6 @@ namespace BackendSRS.Infrastructure.Repositories
                 return false;
             }
 
-
-
             return true;
         }
 

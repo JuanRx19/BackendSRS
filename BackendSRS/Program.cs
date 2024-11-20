@@ -58,8 +58,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IDispositivosRepository, DispositivosRepository>();
+builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
 builder.Services.AddScoped<UsuariosService>();
 builder.Services.AddScoped<InventarioService>();
+builder.Services.AddScoped<ReportesService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEncriptacionService, EncriptacionService>();
 builder.Services.AddCors(options =>
