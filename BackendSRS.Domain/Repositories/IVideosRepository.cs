@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackendSRS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace BackendSRS.Domain.Repositories
 {
     public interface IVideosRepository
     {
+        List<Videos> GetVideos();
     }
 }

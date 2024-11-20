@@ -13,7 +13,7 @@ public partial class Videos
 
     public DateTime FechaGrabacion { get; set; }
 
-    public int? Duracion { get; set; }
+    public string Duracion { get; set; } = null!;
 
     public string Tipo { get; set; } = null!;
 

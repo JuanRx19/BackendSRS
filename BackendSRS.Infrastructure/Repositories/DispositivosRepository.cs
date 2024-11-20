@@ -34,5 +34,11 @@ namespace BackendSRS.Infrastructure.Repositories
                     })
                     .ToList();
         }
+
+        public void AddDevice(Dispositivos dispositivo)
+        {
+            _context.Dispositivos.Add(dispositivo);
+            _context.SaveChanges();
+        }
     }
 }

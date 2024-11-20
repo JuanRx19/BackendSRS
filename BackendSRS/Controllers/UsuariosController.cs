@@ -52,17 +52,15 @@ namespace BackendSRS.API.Controllers
         public IActionResult CreateUsuario([FromBody] JObject data)
         {
             string nombre = data["nombre"]?.ToString() ?? string.Empty;
-            string apellido = data["apellido"]?.ToString() ?? string.Empty;
             string email = data["email"]?.ToString() ?? string.Empty;
             string password = data["password"]?.ToString() ?? string.Empty;
             int rolId = data["rolId"] != null ? int.Parse(data["rolId"].ToString()) : 3;
             DateTime fechaRegistro = DateTime.Now;
 
-            var result = _usuariosService.CreateUsuario(nombre, apellido, email, password, rolId, fechaRegistro);
+            var result = _usuariosService.CreateUsuario(nombre, email, password, rolId, fechaRegistro);
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet("GetUsuarios")]
         public IActionResult GetUsuarios()
         {

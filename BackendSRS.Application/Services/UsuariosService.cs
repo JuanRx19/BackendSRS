@@ -20,7 +20,7 @@ namespace BackendSRS.Application.Services
             _encriptacionService = encriptacionService;
             _usuarioRepository = usuarioRepository;
         }
-        public async Task CreateUsuario(string nombre, string apellido, string email, string password, int rolId, DateTime fechaRegistro)
+        public async Task CreateUsuario(string nombre, string email, string password, int rolId, DateTime fechaRegistro)
         {
             Usuarios usuario = new Usuarios();
 

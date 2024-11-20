@@ -10,5 +10,6 @@ namespace BackendSRS.Domain.Repositories
     public interface IDispositivosRepository
     {
         public List<Dispositivos> GetDispositivos();
+        public void AddDevice(Dispositivos dispositivo);
     }
 }

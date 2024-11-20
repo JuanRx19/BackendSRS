@@ -1,4 +1,5 @@
 ﻿using BackendSRS.Application.Services;
+using BackendSRS.Domain.Entities.DTO;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -29,6 +30,12 @@ namespace BackendSRS.API.Controllers
         {
             var result = _inventarioService.GetInventario();
             return Ok(result);
+        }
+
+        [HttpPost("AgregarDispositivo")]
+        public void AgregarDispositivo([FromBody] DispositivoTO device)
+        {
+            _inventarioService.AddDevice(device.Nombre, device.Ubicacion, device.Bateria, device.Tipo);
         }
     }
 }

@@ -22,5 +22,21 @@ namespace BackendSRS.Application.Services
         {
             return _dispositivosRepository.GetDispositivos();
         }
+
+
+        public void AddDevice(string Nombre, string Ubicacion, string Bateria, string Tipo)
+        {
+            Dispositivos dispositivo = new Dispositivos
+            {
+                Nombre = Nombre,
+                UbicacionActual = Ubicacion,
+                Bateria = int.Parse(Bateria),
+                Tipo = Tipo,
+                Estado = "Disponible",
+                UltimaMantenimiento = DateTime.Now,
+                FechaRegistro = DateTime.Now
+            };
+            _dispositivosRepository.AddDevice(dispositivo);
+        }
     }
 }
