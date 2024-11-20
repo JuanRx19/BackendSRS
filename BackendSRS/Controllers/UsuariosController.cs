@@ -1,9 +1,12 @@
 ﻿using BackendSRS.Application.Services;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace BackendSRS.API.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
     {
         private readonly UsuariosService _usuariosService;
@@ -21,12 +24,34 @@ namespace BackendSRS.API.Controllers
         //    return Ok(result);
         //}
 
-        // Endpoint para GetAyuda
-        [HttpGet("GetAyuda")]
-        public IActionResult GetAyuda()
+        [HttpPost("VerificarInicioSesion")]
+        public IActionResult VerificarInicioSesion([FromBody] LoginRequest request)
         {
-            var result = _usuariosService.GetAyuda();
-            return Ok(result);
+            if (request == null || string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest(new { exito = false, mensaje = "Datos de inicio de sesión incompletos." });
+            }
+
+            try
+            {
+                bool resultado = _usuariosService.VerificarInicioSesion(request.Email.ToString(), request.Password.ToString());
+
+                // Supongo que `VerificarInicioSesion` devuelve un booleano o similar.
+                // Ajusta según la implementación real de tu servicio.
+                if (resultado)
+                {
+                    return Ok(new { exito = true, mensaje = "Inicio de sesión exitoso." });
+                }
+                else
+                {
+                    return Unauthorized(new { exito = false, mensaje = "Credenciales inválidas." });
+                }
+            }
+            catch (Exception ex)
+            {
+                // En producción, evita devolver detalles de excepciones al cliente.
+                return StatusCode(500, new { exito = false, mensaje = "Ocurrió un error en el servidor.", detalle = ex.Message });
+            }
         }
 
         // Endpoint para CreateUsuario
@@ -41,6 +66,13 @@ namespace BackendSRS.API.Controllers
             DateTime fechaRegistro = DateTime.Now;
 
             var result = _usuariosService.CreateUsuario(nombre, apellido, email, password, rolId, fechaRegistro);
+            return Ok(result);
+        }
+
+        [HttpGet("GetUsuarios")]
+        public IActionResult GetUsuarios()
+        {
+            var result = _usuariosService.GetUsuarios();
             return Ok(result);
         }
     }
