@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackendSRS.Models;
 
 namespace BackendSRS.Models;
 
@@ -21,7 +22,7 @@ public partial class Dispositivos
 
     public DateTime? FechaRegistro { get; set; }
 
-    public virtual ICollection<Alertas> Alerta { get; set; } = new List<Alertas>();
+    public virtual ICollection<Alertas> Alertas { get; set; } = new List<Alertas>();
 
     public virtual ICollection<Inventario> Inventarios { get; set; } = new List<Inventario>();
 

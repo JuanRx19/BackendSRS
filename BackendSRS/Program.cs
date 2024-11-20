@@ -51,6 +51,9 @@ builder.Services.AddDbContext<BdtransporteUniversitarioContext>(options =>
     new MySqlServerVersion(new Version(8, 0, 21))));
 
 // Configura Swagger
+builder.Services.AddScoped<IAlertasRepository, AlertasRepository>();
+builder.Services.AddScoped<AlertasService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -86,6 +89,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("AllowFrontend");
 
 
 app.Run();

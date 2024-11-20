@@ -65,11 +65,11 @@ public partial class BdtransporteUniversitarioContext : DbContext
             entity.Property(e => e.TipoAlerta).HasColumnType("enum('batería baja','condición climática','atasco','otro')");
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
 
-            entity.HasOne(d => d.Dispositivo).WithMany(p => p.Alerta)
+            entity.HasOne(d => d.Dispositivo).WithMany(p => p.Alertas)
                 .HasForeignKey(d => d.DispositivoId)
                 .HasConstraintName("alertas_ibfk_1");
 
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Alerta)
+            entity.HasOne(d => d.Usuario).WithMany(p => p.Alertas)
                 .HasForeignKey(d => d.UsuarioId)
                 .HasConstraintName("alertas_ibfk_2");
         });
